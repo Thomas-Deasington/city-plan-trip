@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+  @apply p-4 bg-slate-800 text-indigo-300;
+}
+
+footer {
+  @apply fixed bottom-0 w-full text-center;
+}
