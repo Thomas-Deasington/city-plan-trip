@@ -27,7 +27,8 @@
   import { trip, tripPlan } from '$lib/stores/main';
   import Input from '$lib/components/Input.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
-	import type { TripPlanType } from '../../types/trip.type';
+  import type { TripPlanType } from '../../types/trip.type';
+  import { toast } from '@zerodevx/svelte-toast'
 
   let loading = false
   $: isFormValid = $trip.city && $trip.description
@@ -51,9 +52,14 @@
       $tripPlan = JSON.parse(json.choices?.[0]?.text.replace(/(\r\n|\n|\r)/gm, "")) as TripPlanType
     } catch (e) {
       console.error(e)
+      toast.push('Something went wrong, please try again later', {
+        theme: {
+          '--toastColor': 'mintcream',
+          '--toastBackground': '#E26D69',
+          '--toastBarBackground': '#E26D69'
+        }
+      })
     }
-    console.log('tripPlan', $tripPlan)
-    // TODO: toast error
     loading = false
   }
 </script>

@@ -1,5 +1,5 @@
 <div class="w-1/2 h-[500px] bg-black p-6 leading-9 italic border border-r-0 border-white rounded-sm rounded-r-none overflow-y-auto">
-  {#if !$tripPlan.description }
+  {#if tripPlanIsEmpty }
     <p>Try search for...</p><br>
     <p><mark>Kyoto</mark> + <mark>1 day trips with temples and foods by bike</mark></p>
     <p><mark>Vancouver</mark> + <mark>2 day road trip with kids and pets</mark></p>
@@ -23,6 +23,8 @@
 
 <script lang="ts">
   import { tripPlan } from '$lib/stores/main';
+
+  $: tripPlanIsEmpty = Object.values($tripPlan).every(x => x !== null && x.length === 0)
 </script>
 
 <style lang="scss">
