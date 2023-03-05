@@ -6,7 +6,7 @@
 {#if !loading}
   <button
     class="w-full mt-2 bg-indigo-400 text-white rounded-md p-2"
-    on:click={toggleLoading}
+    on:click={getTripPlan}
     disabled={!isFormValid}
   >
     Plan it ✍️
@@ -24,14 +24,29 @@
 {/if}
 
 <script lang="ts">
-  import { trip } from '$lib/stores/main';
+  import { trip, tripPlan } from '$lib/stores/main';
   import Input from '$lib/components/Input.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
 
   let loading = false
   $: isFormValid = $trip.city && $trip.description
 
-  function toggleLoading () {
-    loading = !loading
+  async function getTripPlan () {
+    loading = true
+    const response = await fetch('/api/search-trip', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        city: $trip.city,
+        description: $trip.description
+      })
+    })
+
+    const json = await response.json()
+    $tripPlan.description = json.choices?.[0]?.text
+    loading = false
   }
 </script>
