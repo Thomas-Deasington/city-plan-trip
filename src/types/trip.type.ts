@@ -9,5 +9,7 @@ export type TripPlanType = {
   pointsOfInterest: {
     title: string
     description: string
+    latitude: string
+    longitude: string
   }[]
 }

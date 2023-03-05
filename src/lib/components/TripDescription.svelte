@@ -11,9 +11,16 @@
       <div class="mt-5">
         <h3 class="text-lg font-bold mb-2">Points of interest :</h3>
         <ul class="ml-6">
-          {#each $tripPlan.pointsOfInterest as pointsOfInterest}
+          {#each $tripPlan.pointsOfInterest as place, index}
             <li class="mb-2">
-              <mark class="cursor-pointer font-bold">{@html pointsOfInterest.title} :</mark> {@html pointsOfInterest.description}
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <mark
+                on:click={selectPlace(index)}
+                class="cursor-pointer font-bold"
+              >
+                {@html place.title} :
+              </mark>
+              {@html place.description}
             </li>
           {/each}
         </ul>
@@ -22,9 +29,15 @@
 </div>
 
 <script lang="ts">
-  import { tripPlan } from '$lib/stores/main';
+  import { tripPlan, selectedPointOfInterestIndex } from '$lib/stores/main';
 
   $: tripPlanIsEmpty = Object.values($tripPlan).every(x => x !== null && x.length === 0)
+
+  function selectPlace (index: number) {
+    return () => {
+      $selectedPointOfInterestIndex = index
+    }
+  }
 </script>
 
 <style lang="scss">

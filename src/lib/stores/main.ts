@@ -6,8 +6,14 @@ export const trip: Writable<TripType> = writable({
   description: ''
 })
 
-export const tripPlan: Writable<TripPlanType> = writable({
+export const tripPlan = writable<TripPlanType>({
   title: '',
   description: '',
   pointsOfInterest: []
 })
+
+export const isTripPlanLoading = writable<boolean>(false)
+
+export const selectedPointOfInterestIndex = writable<number>(0)
+
+// TODO export only one object with all the data

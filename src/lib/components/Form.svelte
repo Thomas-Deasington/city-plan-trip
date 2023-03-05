@@ -2,8 +2,7 @@
   <Input placeholder="City" className="w-full sm:w-1/6" bind:value={$trip.city} />
   <Input placeholder="Give a short description about your trip" className="w-full sm:w-5/6 mt-2 sm:mt-0 sm:ml-2" bind:value={$trip.description} />
 </div>
-
-{#if !loading}
+{#if !$isTripPlanLoading}
   <button
     class="w-full mt-2 bg-indigo-400 text-white rounded-md p-2"
     on:click={getTripPlan}
@@ -24,17 +23,17 @@
 {/if}
 
 <script lang="ts">
-  import { trip, tripPlan } from '$lib/stores/main';
+  import { trip, tripPlan, selectedPointOfInterestIndex, isTripPlanLoading } from '$lib/stores/main';
   import Input from '$lib/components/Input.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import type { TripPlanType } from '../../types/trip.type';
   import { toast } from '@zerodevx/svelte-toast'
 
-  let loading = false
   $: isFormValid = $trip.city && $trip.description
 
   async function getTripPlan () {
-    loading = true
+    $isTripPlanLoading = true
+    $selectedPointOfInterestIndex = 0
     const response = await fetch('/api/search-trip', {
       method: 'POST',
       headers: {
@@ -60,6 +59,6 @@
         }
       })
     }
-    loading = false
+    $isTripPlanLoading = false
   }
 </script>
