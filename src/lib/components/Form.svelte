@@ -27,6 +27,7 @@
   import { trip, tripPlan } from '$lib/stores/main';
   import Input from '$lib/components/Input.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
+	import type { TripPlanType } from '../../types/trip.type';
 
   let loading = false
   $: isFormValid = $trip.city && $trip.description
@@ -46,7 +47,13 @@
     })
 
     const json = await response.json()
-    $tripPlan.description = json.choices?.[0]?.text
+    try {
+      $tripPlan = JSON.parse(json.choices?.[0]?.text.replace(/(\r\n|\n|\r)/gm, "")) as TripPlanType
+    } catch (e) {
+      console.error(e)
+    }
+    console.log('tripPlan', $tripPlan)
+    // TODO: toast error
     loading = false
   }
 </script>

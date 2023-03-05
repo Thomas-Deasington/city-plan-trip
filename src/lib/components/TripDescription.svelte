@@ -5,7 +5,16 @@
     <p><mark>Vancouver</mark> + <mark>2 day road trip with kids and pets</mark></p>
     <p><mark>San Francisco</mark> + <mark>5 things to do in the city</mark></p>
   {:else}
-      {@html $tripPlan.description}
+      <h2>{@html $tripPlan.title}</h2>
+      <p>{@html $tripPlan.description}</p>
+      <div>
+        <h3>Things to do</h3>
+        <ul>
+          {#each $tripPlan.pointsOfInterest as pointsOfInterest}
+            <li>{@html pointsOfInterest.title} : {@html pointsOfInterest.description}</li>
+          {/each}
+        </ul>
+      </div>
   {/if}
 </div>
 

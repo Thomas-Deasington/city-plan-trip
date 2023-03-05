@@ -4,6 +4,10 @@ export type TripType = {
 }
 
 export type TripPlanType = {
-  pointsOfInterest: Array<string>
+  title: string
   description: string
+  pointsOfInterest: {
+    title: string
+    description: string
+  }[]
 }
