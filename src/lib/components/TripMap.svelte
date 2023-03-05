@@ -4,7 +4,7 @@
     bind:this={mapComponent} 
     on:ready={onReady}
   >
-    <Marker lat=35.6825 lng=139.7521 label="TKY" />
+    <Marker lat=35.6825 lng=139.7521 label="TKY" color="rgb(129,140,248)" />
   </Map>
 </div>
 
