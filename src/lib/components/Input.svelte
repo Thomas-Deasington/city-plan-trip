@@ -1,10 +1,10 @@
-<input type="text" placeholder={placeholder} class={className} bind:value={value} />
-
 <script lang="ts">
   export let placeholder: string;
   export let className: string;
   export let value: string;
 </script>
+
+<input type="text" {placeholder} class={className} bind:value />
 
 <style lang="scss">
   input {

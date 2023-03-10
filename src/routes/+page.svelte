@@ -1,3 +1,9 @@
+<script lang="ts">
+  import Form from '$lib/components/Form.svelte';
+  import TripDescription from '$lib/components/TripDescription.svelte';
+  import TripMap from '$lib/components/TripMap.svelte';
+</script>
+
 <div class="">
   <header>
     <Form />
@@ -7,13 +13,11 @@
     <TripMap />
   </main>
   <footer>
-    City Plan Trip, made by <a class="underline" href="https://github.com/Thomas-Deasington" target="_blank" rel="noreferrer">tdeasington</a>
+    City Plan Trip, made by <a
+      class="underline"
+      href="https://github.com/Thomas-Deasington"
+      target="_blank"
+      rel="noreferrer">tdeasington</a
+    >
   </footer>
 </div>
-
-<script lang="ts">
-  import Form from '$lib/components/Form.svelte';
-  import TripDescription from '$lib/components/TripDescription.svelte';
-  import TripMap from '$lib/components/TripMap.svelte';
-
-</script>

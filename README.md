@@ -1,4 +1,5 @@
 # City Plan Trip Project with Svelte, OpenAI and Mapbox
+
 Inspired by Lichin Lin https://twitter.com/lichinlin/status/1631213239945277441?s=20
 
 ![presentation.png](presentation.png)

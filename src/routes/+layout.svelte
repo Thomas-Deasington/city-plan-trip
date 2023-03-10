@@ -1,17 +1,17 @@
-<slot />
-<SvelteToast {options} />
-
 <script>
-  import "../app.css";
-  import { SvelteToast } from '@zerodevx/svelte-toast'
+  import '../app.css';
+  import { SvelteToast } from '@zerodevx/svelte-toast';
 
   const options = {
     reversed: true,
     intro: {
       y: 192
     }
-  }
+  };
 </script>
+
+<slot />
+<SvelteToast {options} />
 
 <style>
   :root {
