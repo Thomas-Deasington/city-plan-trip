@@ -2,6 +2,9 @@ FROM node:18
 
 WORKDIR /app
 
+ENV OPENAI_API_KEY=""
+ENV PUBLIC_MAPBOX_TOKEN=""
+
 COPY package*.json ./
 RUN npm install
 COPY . ./
