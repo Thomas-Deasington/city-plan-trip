@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"copy-to-clipboard": "^3.3.3",
 		"openai": "^3.2.1"
 	}
 }
