@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Map, Marker } from '@beyonk/svelte-mapbox';
-  import { PUBLIC_MAPBOX_TOKEN } from '$env/static/public';
+  import { env } from '$env/dynamic/public';
   import { tripPlan, selectedPointOfInterestIndex } from '$lib/stores/main';
 
   let mapComponent: any;
@@ -29,7 +29,7 @@
 
 <div class="w-1/2 h-[500px] border border-l-0 border-white rounded-sm rounded-l-none">
   <Map
-    accessToken={PUBLIC_MAPBOX_TOKEN}
+    accessToken={env.PUBLIC_MAPBOX_TOKEN}
     style="mapbox://styles/mapbox/outdoors-v11"
     bind:this={mapComponent}
     on:ready={onReady}

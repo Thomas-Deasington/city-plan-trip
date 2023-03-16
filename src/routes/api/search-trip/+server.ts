@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from 'openai';
-import { OPENAI_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import type { TripType } from '../../../types/trip.type';
 
 export async function POST({ request }: any): Promise<Response> {
@@ -14,7 +14,7 @@ export async function POST({ request }: any): Promise<Response> {
   }
 
   const config = new Configuration({
-    apiKey: OPENAI_API_KEY
+    apiKey: env.OPENAI_API_KEY
   });
 
   const openapi = new OpenAIApi(config);
