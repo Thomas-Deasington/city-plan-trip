@@ -22,9 +22,9 @@ export async function POST({ request }: any): Promise<Response> {
   try {
     const res = await openapi.createCompletion({
       model: 'text-davinci-003',
-      prompt: `I want to go to ${city}. This is the description of my desired journey ${description}. Make me a plan for this trip. Start by a title. Then do a little description of the trip. Then list the points of interest. Return these statements as a JSON Object with the structure {“title”:“...”,“description”:“...”,“pointsOfInterest”:[{“title”:“...”,“description”:“...”,latitude:“...”,longitude:“...”}}]}. Be careful to return a valid JSON.`,
-      temperature: 0.2,
-      max_tokens: 1024
+      prompt: `I want to go to ${city}. This is the description of the kind of places I want to visit ${description}. Make me a plan for this trip. Start by a title. Then do a little description of the trip. Then list the points of interest (between 1 to 10). Return these statements as a JSON Object with the structure {“title”:“...”,“description”:“...”,“pointsOfInterest”:[{“title”:“...”,“description”:“...”,latitude:“...”,longitude:“...”}}]}. Be careful to return a valid JSON and correct geolocation.`,
+      temperature: 0.5,
+      max_tokens: 2048
     });
 
     return new Response(JSON.stringify(res.data), { status: 200 });

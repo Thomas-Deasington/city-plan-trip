@@ -47,7 +47,7 @@
 <div class="w-full block sm:flex">
   <Input placeholder="City" className="w-full sm:w-1/6" bind:value={$trip.city} />
   <Input
-    placeholder="Give a short description about your trip"
+    placeholder="Give a short description about the places you want to visit"
     className="w-full sm:w-5/6 mt-2 sm:mt-0 sm:ml-2"
     bind:value={$trip.description}
   />
