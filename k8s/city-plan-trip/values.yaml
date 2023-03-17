@@ -1,0 +1,56 @@
+# Default values for city-plan-trip.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: tdeasington/city-plan-trip
+  pullPolicy: Always
+  tag: latest
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+  annotations: {}
+  name: vault
+
+podAnnotations:
+  vault.hashicorp.com/agent-inject: 'true'
+  vault.hashicorp.com/role: 'webapp'
+  vault.hashicorp.com/agent-inject-secret-config: 'secret/data/webapp/config'
+  # Environment variable export template
+  vault.hashicorp.com/agent-inject-template-config: |
+    {{ with secret "secret/data/webapp/config" -}}
+      export PUBLIC_MAPBOX_TOKEN="{{ .Data.data.PUBLIC_MAPBOX_TOKEN }}"
+      export OPENAI_API_KEY="{{ .Data.data.OPENAI_API_KEY }}"
+    {{- end }}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: city-plan-trip.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
