@@ -34,15 +34,15 @@
     bind:this={mapComponent}
     on:ready={onReady}
   >
-    {#each $tripPlan.pointsOfInterest as place}
-      {#if place.latitude && place.longitude}
+    {#each $tripPlan.pointsOfInterest as place, index}
+      {#key $selectedPointOfInterestIndex}
         <Marker
           lat={place.latitude}
           lng={place.longitude}
           label={place.title}
-          color="rgb(129,140,248)"
+          color={$selectedPointOfInterestIndex === index ? 'rgb(67,55,201)' : 'rgb(129,140,248)'}
         />
-      {/if}
+      {/key}
     {/each}
   </Map>
 </div>

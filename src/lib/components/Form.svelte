@@ -13,34 +13,36 @@
   $: isFormValid = $trip.city && $trip.description;
 
   async function getTripPlan() {
-    $isTripPlanLoading = true;
-    $selectedPointOfInterestIndex = 0;
-    const response = await fetch('/api/search-trip', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        city: $trip.city,
-        description: $trip.description
-      })
-    });
-
-    const json = await response.json();
-    try {
-      $tripPlan = JSON.parse(json.choices?.[0]?.text.replace(/(\r\n|\n|\r)/gm, '')) as TripPlanType;
-    } catch (e) {
-      console.error(e);
-      toast.push('Something went wrong, please try again later', {
-        theme: {
-          '--toastColor': 'mintcream',
-          '--toastBackground': '#E26D69',
-          '--toastBarBackground': '#E26D69'
-        }
+    if (isFormValid) {
+      $isTripPlanLoading = true;
+      $selectedPointOfInterestIndex = 0;
+      const response = await fetch('/api/search-trip', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          city: $trip.city,
+          description: $trip.description
+        })
       });
+
+      const json = await response.json();
+      try {
+        $tripPlan = JSON.parse(json.choices?.[0]?.text.replace(/(\r\n|\n|\r)/gm, '')) as TripPlanType;
+      } catch (e) {
+        console.error(e);
+        toast.push('Something went wrong, please try again later', {
+          theme: {
+            '--toastColor': 'mintcream',
+            '--toastBackground': '#E26D69',
+            '--toastBarBackground': '#E26D69'
+          }
+        });
+      }
+      $isTripPlanLoading = false;
     }
-    $isTripPlanLoading = false;
   }
 </script>
 
@@ -58,7 +60,7 @@
     on:click={getTripPlan}
     disabled={!isFormValid}
   >
-    Plan it ✍️
+    Discover 📍
   </button>
 {:else}
   <button class="w-full mt-2 bg-indigo-400 text-white rounded-md p-2" disabled>
