@@ -9,4 +9,5 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .env
-/k8s/vault
+/k8s/vault/cluster-keys.json
+/k8s/vault/helm-vault-raft-values.yml
